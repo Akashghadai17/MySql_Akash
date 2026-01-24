@@ -1,0 +1,29 @@
+Showing Databases
+-----------------
+-To lists all available databases
+Sql- show databases; 
+
+Creating Database
+-----------------
+-Creates a database with the specified name
+Sql- create database <database-name>; 
+     create database if not exists <database-name>; 
+
+Deleting Database
+-----------------
+-Deletes an entire database
+Sql- drop database <database-name>; 
+     drop database if exists <database-name>; 
+
+Using Database
+--------------
+-Sets the specified database as the current working database for subsequent SQL commands.
+Sql- use <database-name>; 
+
+Showing Current Working Database
+---------------------------------
+-Returns the name of the database that is currently selected
+Sql- SELECT database(); 
+
+
+
