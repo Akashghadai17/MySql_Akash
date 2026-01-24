@@ -1,0 +1,14 @@
+SQL Comments
+------------
+-SQL Comments are used to explain code and are not executed by the database.
+
+Types of SQL Comments:
+-----------------------
+1.Single-line comment: Starts with --
+SQL:
+    -- This is a single-line comment
+
+2.Multi-line comment: Enclosed within /* */
+SQL:
+    /* This is
+       a multi-line comment */
