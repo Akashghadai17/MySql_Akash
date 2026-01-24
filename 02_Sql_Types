@@ -58,6 +58,12 @@ Naming Convention
 -Special characters are not allowed
 -Avoid reserved words
 
+Table
+-----
+-Table stores data in the form of rows and columns.
+-Each table has a name.
+-Each column within the table has a name, data type and size.
+
 
 
 
