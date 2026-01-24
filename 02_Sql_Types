@@ -1,0 +1,81 @@
+SQL (Structure Query Language) 
+------------------------------
+-SQL is a query language used to interact with databases.
+
+Types of SQL commands
+---------------------
+-SQL commands are divided into below categories: 
+  1.DDL (Data Definition Language) 
+  2.DML (Data Manipulation Language) 
+  3.DQL (Data Query Language) 
+  4.TCL (Transaction Control Language) 
+  5.DCL (Data Control Language)
+
+DDL (Data Definition Language) 
+------------------------------
+-These commands are given to manage database objects such as tables, views etc. 
+Example: 
+        1.CREATE 
+        2.ALTER 
+        3.RENAME
+        4.DROP 
+        5.TRUNCATE
+
+DML (Data Manipulation Language) 
+--------------------------------
+-These commands are given to store/ update/ delete data. 
+Example: 
+        1.INSERT 
+        2.UPDATE 
+        3.DELETE 
+
+DQL (Data Query Language) 
+-------------------------
+-These commands are given to fetch/read data. 
+Example: 
+        SELECT 
+
+TCL (Transaction Control Language)
+----------------------------------
+-These commands are given to control transactions. 
+Example: 
+        1.COMMIT 
+        2.ROLLBACK 
+        3.SAVEPOINT 
+
+5.DCL (Data Control Language)
+-----------------------------
+-These commands are given to manage permission. 
+Example: 
+        1.GRANT 
+        2.REVOKE
+
+Naming Convention
+-----------------
+-Use lower case letters
+-Allowed characters are alphabet, numbers and symbol( -, _ and $)
+-Use underscores (_) to separate words
+-Special characters are not allowed
+-Avoid reserved words
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
