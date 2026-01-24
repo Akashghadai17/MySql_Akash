@@ -1,1 +1,147 @@
+DDL (Data Definition Language) 
+------------------------------
+-These commands are given to manage database objects such as tables, views etc. 
+Example: 
+        1.CREATE 
+        2.ALTER 
+        3.RENAME
+        4.DROP 
+        5.TRUNCATE 
+
+1.CREATE TABLE
+--------------
+Syntax:
+      CREATE TABLE table_name ( 
+             column1 datatype(size), 
+             column2 datatype(size), ……..
+      );  
+
+Example:
+-Table Name: students
+Sql-
+    CREATE TABLE  students( 
+           rollnumber int, 
+           firstname varchar(30), 
+           lastname varchar(30) 
+    );  
+
+| [Column Name] | [Data Type] | [Size] |
+|  roll_number |    int      |  10    |
+|  firstname   |  varchar    |  30    |
+|  lastname    |  varchar    |  30    |
+
+Show Table Structure
+-------------------
+Syntax:
+      DESC table_name; 
+Example:
+      DESC students;
+
+List All Tables
+---------------
+Sql- show tables;  
+
+2.ALTER(Modifying Table)
+-----------------------
+-ALTER command is used to modify table structure.
+-We can use ADD, CHANGE and RENAME option with ALTER command.
+
+Add New Column
+--------------
+Syntax:
+      ALTER TABLE table_name ADD column_name datatype(size);  
+Example:
+      ALTER TABLE students ADD address varchar(100);
+      DESC students;
+
+| [Column Name] | [Data Type]    | [Null] | [Default] |
+|  rollnumber   | int            |  YES   |   NULL    |
+|  firstname    | varchar(30)    |  YES   |   NULL    |
+|  lastname     | varchar(30)    |  YES   |   NULL    |
+|  address      | varchar(100)   |  YES   |   NULL    |
+
+Note: 
+-----
+-By default, when using the ALTER TABLE statement to add a new column to a table, the column is added at the end of the existing column list.
+-To add new column at the beginning.
+Sql-  
+    ALTER TABLE students ADD id int(10) FIRST;
+-To add a new column at a specific position within the table, use the AFTER keyword followed by the name of the existing column.
+Sql-
+    ALTER TABLE students ADD age int(3) AFTER lastname;
+
+CHANGE (Modifying Existing Column)
+---------------------------------
+-We can change name, data type and size of the column.
+Syntax:
+      ALTER TABLE employee CHANGE old_column_name  new_column_name datatype(size); 
+Example:
+      ALTER TABLE students CHANGE mark marks decimal(5,2);  
+
+DROP (Delete Existing Columns)
+------------------------------
+Syntax:
+      ALTER TABLE table_name DROP column_name;
+Example:
+      ALTER TABLE students DROP age; 
+
+MODIFY (Alter with Modify Command)
+----------------------------------
+-MODIFY is used to change only the data type, size, or constraints of an existing column.
+-Does'n change column name.
+Syntax:
+      ALTER TABLE table_name MODIFY  col_name datatype(size);
+      ALTER TABLE table_name MODIFY  col_name1 datatype(size) AFTER col_name2;
+Example:
+      ALTER TABLE students MODIFY address varchar(50);
+
+3.RENAME Table 
+------------
+Syntax:
+RENAME TABLE old_table_name TO new_table_name; 
+Example:
+RENAME TABLE students TO students_backup; 
+
+4.DROP(Delete Table)
+--------------------
+Syntax:
+      DROP TABLE table_name;
+Example
+      DROP TABLE students; 
+
+5.TRUNCATE(Deleting All Rows from Table )
+---------------------------------------
+Syntax:
+TRUNCATE TABLE table_name;
+Example:
+TRUNCATE TABLE table_name;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
