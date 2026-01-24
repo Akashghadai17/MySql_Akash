@@ -1,1 +1,251 @@
+DML (Data Manipulation Language) 
+--------------------------------
+-These commands are given to store/ update/ delete data. 
+Example: 
+        1.INSERT 
+        2.UPDATE 
+        3.DELETE 
+
+CRUD
+----
+1.Create
+------
+-This operation is about creating or adding new records to the table.
+-Create data with INSERT command
+
+Table: User 
+Columns: (id, name, age) 
+
+Example:
+        CREATE TABLE user(
+        	id int,
+            name varchar(30),
+            age int
+        );
+        DESC user;
+
+        | [Field] | [Type]        | [Null] | [Key] | [Default] | [Extra] |
+        |  id     | int           |  YES   |       |   NULL    |         |
+        |  name   | varchar(30)   |  YES   |       |   NULL    |         |
+        |  age    | int           |  YES   |       |   NULL    |         |
+Adding Data in to Table
+-----------------------
+-INSERT command is used to add data into the table.
+
+Case1: (Insert Data to All Columns) 
+Syntax: 
+      INSERT INTO <table_name> VALUES(value1,value2....valuen); 
+      INSERT INTO <table_name>(col1_name, col2_name …) VALUES(value1,value2....valuen); 
+Exaple:
+      INSERT INTO user values(1,'Akash',22);
+      SELECT * FROM user;
+
+      | [id] | [name]  | [age] |
+      |  1   | Akash   |  22   |
+
+Case2: (Insert Partial Data) 
+Syntax:
+      INSERT INTO <table_name>(colname1,colname2,..) VALUES (value1,value2...) 
+Example: 
+      INSERT INTO user(id,name,age) VALUES (2,'Anshu',21);
+      SELECT * FROM user;
+
+      | [id] | [name]  | [age] |
+      |  1   | Akash   |  22   |
+      |  2   | Anshu   |  21   |
+
+Case3: (Insert Multiple Rows) 
+Syntax: 
+      INSERT INTO <table_name> values(value1,value2..),(value1,value2..),(valuen,valuen..); 
+Example:
+        INSERT INTO user values	(3,'Ashu',22),
+						(4,'Abhi',22),
+						(5,'Biswa',20);
+
+        SELECT * FROM user;
+
+      | [id] | [name]  | [age] |
+      |  1   | Akash   |  22   |
+      |  2   | Anshu   |  21   |
+      |  3   | Ashu    |  22   |
+      |  4   | Abhi    |  22   |
+      |  5   | Biswa   |  20   |
+
+Case4: (Insert NULL values)
+Example:
+        INSERT INTO user values	(6,'Ashu',NULL)
+        SELECT * FROM user;
+
+        | [id] | [name]  | [age] |
+        |  1   | Akash   |  22   |
+        |  2   | Anshu   |  21   |
+        |  3   | Ashu    |  22   |
+        |  4   | Abhi    |  22   |
+        |  5   | Biswa   |  20   |
+        |  6   | Ashu    |  NULL |
+
+2.UPDATE( Modify/Update Data )
+--------
+-UPDATE command is used to update data of a table.
+Case1: (Modify Single Column)
+Syntax:
+      UPDATE <table_name> SET col1=value WHERE condition;  
+Example:
+      UPDATE user set name='Ghadai' where id=1;
+      SELECT * FROM user;
+
+      | [id] | [name]  | [age] |
+      |  1   | Ghadai  |  22   |
+      |  2   | Anshu   |  21   |
+      |  3   | Ashu    |  22   |
+      |  4   | Abhi    |  22   |
+      |  5   | Biswa   |  20   |
+      |  6   | Ashu    |  NULL |
+
+Case2: (Modify Multiple Column)
+Syntax:
+      UPDATE <table_name> SET col1=value,col2=value WHERE condition; 
+Example:
+      UPDATE user set name='Akash',age=23 where id=2;
+      SELECT * FROM user;
+
+      | [id] | [name]  | [age] |
+      |  1   | Ghadai  |  22   |
+      |  2   | Akash   |  23   |
+      |  3   | Ashu    |  22   |
+      |  4   | Abhi    |  22   |
+      |  5   | Biswa   |  20   |
+      |  6   | Ashu    |  NULL |
+
+Case4- (Update All Rows)
+Example:
+        UPDATE user set age=30;
+        SELECT * FROM user;
+
+        | id | name   | age |
+        | 1  | Ghadai | 30  |
+        | 2  | Akash  | 30  |
+        | 3  | Ashu   | 30  |
+        | 4  | Abhi   | 30  |
+        | 5  | Biswa  | 30  |
+        | 6  | Ashu   | 30  |
+
+3.Delete Data 
+-------------
+-DELETE command is used to delete data from a table.
+
+Case1: (Delete Specific Rows)
+Syntax:
+      DELETE FROM <table_name> WHERE condition;
+Example:
+      DELETE FROM user where id=6;
+      SELECT * FROM user;
+
+      | id | name   | age |
+      | 1  | Ghadai | 30  |
+      | 2  | Akash  | 30  |
+      | 3  | Ashu   | 30  |
+      | 4  | Abhi   | 30  |
+      | 5  | Biswa  | 30  |
+ 
+Case2: (Delete All Rows)
+Syntax:
+      DELETE FROM <table_name>;
+Example:
+      DELETE FROM user;
+      SELECT * FROM user;
+
+      | id | name   | age |
+
+Retrieve Data(SELECT)
+---------------------
+-SELECT command is used to retrieve data from the table.
+Appraoch1: (All Rows + All Columns)
+Syntax: 
+      SELECT * FROM <table_name>; 
+      SELECT colname1,colname2,colname3 FROM <table_name>; 
+Example:
+        SELECT * FROM user;
+        SELECT id,name,age FROM user;
+
+        | id | name  | age |
+        | 1  | Ghadai| 30  |
+        | 2  | Akash | 30  |
+        | 3  | Ashu  | 30  |
+        | 4  | Abhi  | 30  |
+        | 5  | Biswa | 30  |
+
+Appraoch2: (All Rows + Specific Column)  
+Syntax:
+      SELECT colname1 FROM <table_name>; 
+Example:
+      SELECT id,name from user;
+
+      | id | name   |
+      | 1  | Ghadai |
+      | 2  | Akash  |
+      | 3  | Ashu   |
+      | 4  | Abhi   |
+      | 5  | Biswa  |
+
+Appraoch3: (Specific Rows + All Columns) 
+Syntax:
+      SELECT * FROM <table_name> WHERE condition; 
+Example:
+      SELECT * FROM user where id=2;
+
+      | id | name  | age |
+      | 2  | Akash | 30  |
+
+Appraoch4: (Specific Rows + Specific Columns)
+Syntax:
+      SELECT colname1, colname2 FROM <table_name> WHERE condition; 
+Example:
+      SELECT id,name FROM user WHERE id=1;
+  
+      | id | name   |
+      | 1  | Ghadai |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
