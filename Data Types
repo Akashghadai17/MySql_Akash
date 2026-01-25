@@ -1,0 +1,447 @@
+Data type defines the type of data that a column can hold. 
+Different data types: 
+1.String
+-------
+      CHAR
+      VARCHAR 
+      TEXT
+      ENUM 
+      SET
+2.Number 
+-------
+      INT
+      BIGINT
+      DECIMAL 
+3.Boolean
+--------
+      TINYINT
+      Bool
+      Boolean 
+4.Date 
+----
+    date 
+    time 
+    timestamp 
+5.JSON
+6.BLOB
+
+1.String
+-------
+
+Char Data Type 
+==============
+-It is used to store fixed length alpha-numeric data. 
+Syntax:
+      column_name char(size) 
+-When we are trying to store less number of characters than the size specified in char data type then MySQL server internally adds blank space in place of remaining
+character. 
+Example:
+        CREATE TABLE Employee(
+        		name char(20)
+        );
+        INSERT INTO Employee VALUES( 'Akash');
+        INSERT INTO Employee VALUES( 'Ram');
+        SELECT * FROM Employee;
+        
+        | [name] |
+        | Akash  |
+        | Ram    |
+-If we are not giving size then default value is 1. 
+Example:
+        CREATE TABLE Employee1(
+        		name char
+        );
+        DESC Employee1;
+        
+        | [Field] | [Type]   | [Null] | [Key] | [Default] | [Extra] |
+        |  name   | char(1)  |  YES   |       |   NULL    |         |
+
+Varchar Data Type 
+------------------
+It is used to store variable length alpha-numeric data. 
+Syntax:
+       column_name varchar(size) 
+Example:
+        CREATE TABLE Employee2(
+        		name VArchar(50)
+        );
+        INSERT INTO Employee2 VALUES( 'Akash');
+        INSERT INTO Employee2 VALUES( 'Ram');
+        SELECT * FROM Employee2;
+
+        | [name] |
+        | Akash  |
+        | Ram    |
+
+Text data type 
+--------------
+-It is used to store large amounts of textual data such as article content, comments, or forum posts etc. 
+Syntax:
+       column_name text
+-Size is not applicable. If we are providing size explicitly then MySQL will ignore.
+Example:
+        CREATE TABLE blog_posts (
+            post_id INT,
+            title VARCHAR(255),
+            content TEXT
+        );
+
+Data      Type	Size
+-----    ------------
+CHAR	    255 bytes
+VARCHAR	  ~16 KB (16383 bytes)
+TEXT	    ~64 KB (65535 bytes)
+LONGTEXT	~4 GB
+
+ENUM
+----
+-ENUM represents a fixed set of string values.
+-We can store 65,535 distinct values.
+-Each ENUM has an index. Index begins with 1.
+-Internally, MySQL stores the index, not the string itself.
+Example:
+        CREATE TABLE orders (
+            order_id INT,
+            status ENUM('Pending', 'Approved', 'Rejected')
+        );
+        INSERT INTO orders (status) VALUES ('Pending');
+        INSERT INTO orders (status) VALUES ('Approved');
+        INSERT INTO orders (status) VALUES ('Rejected');
+        SELECT * FROM orders;
+        
+        | [order_id] | [status]   |
+        |   NULL     | Pending    |
+        |   NULL     | Approved   |
+        |   NULL     | Rejected   |
+
+SET
+---
+-ENUM store exactly one option from a fixed list.
+-SET can store multiple options from a fixed list.
+Example:
+        CREATE TABLE employee_skills (
+            name VARCHAR(50),
+            skills SET('mysql', 'python', 'hadoop', 'linux', 'pyspark')
+        );
+        
+        INSERT INTO employee_skills (name, skills) VALUES ('A', 'mysql,python');
+        INSERT INTO employee_skills (name, skills) VALUES ('B', 'python,mysql');
+        INSERT INTO employee_skills (name, skills) VALUES ('C', 'linux,pyspark');
+        INSERT INTO employee_skills (name, skills) VALUES ('D', 'hadoop,pyspark');
+
+
+        SELECT * FROM employee_skills WHERE skills='mysql';
+        SELECT * FROM employee_skills WHERE find_in_set('mysql', skills);
+
+        SELECT * FROM employee_skills;
+        
+        | [name] | [skills]        |
+        |   A    | mysql,python    |
+        |   B    | mysql,python    |
+        |   C    | linux,pyspark   |
+        |   D    | hadoop,pyspark  |
+
+2.Number 
+--------
+
+| [Data Type]     | [Size (Bytes)] | [Maximum Value]        |
+|  tinyint        |       1        | 127 (2^7 − 1)          |
+|  smallint       |       2        | 32767 (2^15 − 1)       |
+|  mediumint      |       3        | 8388607                |
+|  int / integer  |       4        | 2147483647             |
+|  bigint         |       8        | 9223372036854775807    |
+
+int data type 
+-------------
+-It is used to store integers only. It does not store floating point (number with decimal value) number. 
+Syntax:
+       column_name int 
+Example:
+        CREATE TABLE employee3 (
+            employee_id INT
+        );
+        
+        INSERT INTO employee3 VALUES (101);
+        INSERT INTO employee3 VALUES (90.3);
+        INSERT INTO employee3 VALUES (90.5);
+        INSERT INTO employee3 VALUES (90.7);
+        INSERT INTO employee3 VALUES (9090123123); -- Not posiible it is bigint
+        
+        SELECT * FROM employee3
+        | [employee_id] |
+        |      101      |
+        |      90       |
+        |      91       |
+        |      91       |
+
+        CREATE TABLE employee4 (
+            employee_id BIGINT
+        );
+        INSERT INTO employee4 VALUES (9090123123);
+        SELECT * FROM employee4;
+        
+        |employee_id  |
+        |-----------  |
+        |9090123123   |
+
+decimal data type 
+-----------------
+-Non integral data type has an integer part and fractional part.
+-We can use NUMERIC, DECIMAL or NUMBER data type to store non integral numbers.
+
+| Data Type           | Size (Bytes) |
+|---------------------|--------------|
+| Float               | 4            |
+| Decimal / Numeric   | 8            |
+
+| Topic       | Description                                                                 |
+|-------------|-----------------------------------------------------------------------------|
+| Syntax      | column_name DECIMAL(p, s)                                                    |
+| Precision   | Total number of digits (both left and right of the decimal point)           |
+| Scale       | Number of digits to the right of the decimal point                          |
+| Rule 1      | If digits before decimal point > (p − s), an error is raised                |
+| Condition 1 | number_of_digits_before_decimal_point > (p − s) → ERROR                     |
+| Rule 2      | If digits after decimal point > s, MySQL rounds the value                   |
+| Condition 2 | number_of_digits_after_decimal_point > s → input = ROUND(input, s)   
+
+Example:
+        CREATE TABLE employee5( 
+        salary decimal(8,2) 
+        );
+         
+        INSERT INTO employee5 VALUES(300000.20);  
+        INSERT INTO employee5 VALUES(400000.2); 
+        INSERT INTO employee5 VALUES(4000001.2); -- Not possible
+        INSERT INTO employee5 VALUES(4000001); -- Not possible
+        INSERT INTO employee5 VALUES(400000); 
+        INSERT INTO employee5 VALUES(4000.901);
+        INSERT INTO employee5 VALUES(4000.908);
+        INSERT INTO employee5 VALUES(4000.905);
+
+        SELECT * FROM employee5;
+        | salary     |
+        |------------|
+        | 300000.20  |
+        | 400000.20  |
+        | 400000.00  |
+        | 4000.90    |
+        | 4000.91    |
+
+3.Boolean(Boolean/bool/TINYINT Datatype)
+---------
+
+-The Boolean/bool data type stores logical values, i.e., true or false. 
+-boolean and bool data types are same. Both are aliases for the TINYINT.
+Example:
+        CREATE TABLE employee (
+        id int,
+        status boolean
+        );
+
+        INSERT INTO employee VALUES (1, TRUE);
+        DESC employee;
+        | Field  | Type        | Null | Key | Default | Extra |
+        |--------|-------------|------|-----|---------|-------|
+        | id     | int         | YES  |     | NULL    |       |
+        | status | tinyint(1)  | YES  |     | NULL    |       |
+
+        SELECT * FROM employee6;
+        | id | status |
+        |----|--------|
+        | 1  | 1      |
+
+4.Date Data Type
+----------------
+-It is used to store dates in MySQL date format. 
+-It is used to store dates in the format 'YYYY-MM-DD' 
+Syntax:
+      column_name date 
+Example:
+        CREATE TABLE employee7( doj date);
+        INSERT INTO employee7 VALUES('2024-07-12');
+        INSERT INTO employee7 VALUES('12-07-2024'); -- Not posiible ('YYYY-MM-DD') correct
+        
+        INSERT INTO employee7 VALUES(str_to_date('12-07-2024','%d-%m-%Y'));
+        
+        SELECT doj FROM employee7;
+
+        SELECT date_format(doj,'%d-%m-%Y') FROM employee7;
+        | date_format(doj,'%d-%m-%Y') |
+        |----------------------------|
+        | 12-07-2024                 |
+        | 12-07-2024                 |
+        
+        SELECT date_format(doj,'%m-%d-%Y') FROM employee7;
+        | date_format(doj,'%m-%d-%Y') |
+        |----------------------------|
+        | 07-12-2024                 |
+        | 07-12-2024                 |
+
+
+Format Parameter 
+-----------------
+%Y: Year (4 digits) 
+%y: Year (2 digits) 
+%m: Month (01..12) 
+%d: Day (01..31) 
+%H: Hour (00..23) 
+%h: Hour (01..12) 
+%i: Minutes (00..59) 
+%s: Seconds (00..59) 
+%p: AM or PM 
+%W: Day of the week (Sunday..Saturday) 
+%M: Month name (January..December) 
+%b: Abbreviated month name (Jan..Dec) 
+%c: Month number (1..12) 
+
+Time Data Type 
+---------------
+-It is used to store time values.  
+-It represents a time of day in the format 'HH:MM:SS'. 
+Syntax: 
+       columnname time 
+Example:
+        CREATE TABLE employee8( intime time);
+        INSERT INTO employee8 VALUES('12:24:56'); -- 'HH:MM:SS'
+        
+        
+        INSERT INTO employee8 VALUES(str_to_date('10:11:12','%h:%i:%s'));
+        INSERT INTO employee8 VALUES(str_to_date('10-11-12','%h-%i-%s'));
+        
+        
+        SELECT intime FROM employee8;
+        | intime   |
+        |----------|
+        | 10:11:12 |
+        | 10:11:12 |
+        | 10:11:12 |
+        | 12:24:56 |
+        
+        SELECT date_format(intime,'%s:%i:%h') FROM employee8;
+        | date_format(intime,'%s:%i:%h') |
+        |-------------------------------|
+        | 12:11:10                      |
+        | 12:11:10                      |
+        | 12:11:10                      |
+        | 56:24:12                      |
+                
+        SELECT date_format(intime,'%h-%s-%i') FROM employee8;
+        | date_format(intime,'%h-%s-%i') |
+        |-------------------------------|
+        | 10-12-11                      |
+        | 10-12-11                      |
+        | 10-12-11                      |
+        | 12-56-24                      |
+
+Timestamp Data Type 
+-------------------
+-It is used to store date and time values, including both the date and the time of day, in 
+-the format 'YYYY-MM-DD HH:MM:SS'. 
+Syntax:
+      column_name timestamp 
+Example:
+        CREATE TABLE employee9( Create_At timestamp);
+        INSERT INTO employee9 VALUES('2026-01-25 02:11:54'); -- 'HH:MM:SS'
+        INSERT INTO employee9 VALUES('2026/01/24 02:11:54');
+        
+        INSERT INTO employee9 VALUES(str_to_date('2026-23-01 10:11:12','%Y-%d-%m %h:%i:%s'));
+        
+        SELECT Create_At FROM employee9;
+        SELECT date_format(Create_At,'%y-%d-%m %s:%i:%h') FROM employee9;
+
+        | date_format(Create_At,'%y-%d-%m %s:%i:%h') |
+        |------------------------------------------- |
+        | 26-25-01 54:11:02                          |
+        | 26-26-01 54:11:02                          |
+        | 26-24-01 54:11:02                          |
+        | 26-23-01 12:11:10                          |
+
+
+5.JSON
+-------
+JSON (Java Script Object Notation)
+Sample JSON Data
+{
+  "student_id": 1,
+  "name": "Ram",
+  "age": 20
+}
+Example:
+        CREATE TABLE students2 (
+            id INT,
+            data JSON
+        );
+        DESC students2;
+        
+        | Field | Type | Null | Key | Default | Extra |
+        |-------|------|------|-----|---------|-------|
+        | id    | int  | YES  |     | NULL    |       |
+        | data  | json | YES  |     | NULL    |       |
+        
+        INSERT INTO students2 VALUES(2, '{
+          "student_id": 2,
+          "name": "Raj",
+          "age": 30
+        }');
+        
+        SELECT * FROM students2 WHERE data->>'$.age' > 25;
+        | id | data                                   |
+        |----|----------------------------------------|
+        | 2  | {"age": 30, "name": "Raj", "student_id": 2} |
+        
+        SELECT * FROM students2;
+        | id | data                                   |
+        |----|----------------------------------------|
+        | 2  | {"age": 30, "name": "Raj", "student_id": 2} |
+
+6.BLOB
+------
+-BLOB (Binary Large OBject) can store large amounts of binary data, such as images, audio, and video files.
+Example:
+        Create Table
+        CREATE TABLE customer (
+            name VARCHAR(255),
+            signature BLOB
+        );
+Insert Record:
+              INSERT INTO customer VALUES ('Ram', LOAD_FILE('"C:\Users\DELL\OneDrive\Pictures\Camera Roll\IMG_20241013_005435_030.webp"'));
+              
+              SELECT * FROM customer;
+              | name | signature |
+              |------|-----------|
+              | Ram  | NULL      |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
