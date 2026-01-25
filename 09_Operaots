@@ -13,4 +13,170 @@ It is used in number and date data type columns.
 | *        | Multiplication |
 | /        | Division       |
 
+Example:
+      Calculate annual salary (`salary * 12`) for each employee
+Sql:
+      SELECT id, first_name, last_name, salary * 12 AS annual_salary FROM employees;
+      Select * from employees;
+
+      | id | first_name | last_name | annual_salary |
+      |----|------------|-----------|---------------|
+      | 1  | Diane      | Turner    | 63960         |
+      | 2  | Clarence   | Robinson  | 43404         |
+      | 3  | Eugene     | Philips   | 58524         |
+      | 4  | Philip     | Mitchell  | 63108         |
+      | 5  | Ann        | Wright    | 25128         |
+      | 6  | Charles    | Wilson    | 62004         |
+      | 7  | Russell    | Johnson   | 45144         |
+      | 8  | Jacqueline | Cook      | 83076         |
+
+Relational Operator 
+--------------------
+-These operators are used to compare two values. 
+
+| Operator | Meaning                     |
+|----------|-----------------------------|
+| <        | less than                   |
+| <=       | less than or equal to       |
+| >        | greater than                |
+| >=       | greater than or equal to    |
+| =        | equal to                    |
+| != or <> | not equal to                |
+
+Example:
+        Write a query to display employees whose salary is less than 60000. 
+        SELECT * FROM employees WHERE salary < 60000;
+        
+        | id | first_name | last_name | department_id | salary | years_worked |
+        |----|------------|-----------|---------------|--------|--------------|
+        | 1  | Diane      | Turner    | 1             | 5330   | 4            |
+        | 2  | Clarence   | Robinson  | 1             | 3617   | 2            |
+        | 3  | Eugene     | Philips   | 1             | 4877   | 2            |
+        | 4  | Philip     | Mitchell  | 1             | 5259   | 3            |
+        | 5  | Ann        | Wright    | 2             | 2094   | 5            |
+        | 6  | Charles    | Wilson    | 2             | 5167   | 5            |
+        | 7  | Russell    | Johnson   | 2             | 3762   | 4            |
+        | 8  | Jacqueline | Cook      | 2             | 6923   | 3            |
+
+        Write a query to display employees whose salary is less than or equal to 60000. 
+        SELECT * FROM employees WHERE salary <= 60000;
+        | id | first_name | last_name | department_id | salary | years_worked |
+        |----|------------|-----------|---------------|--------|--------------|
+        | 1  | Diane      | Turner    | 1             | 5330   | 4            |
+        | 2  | Clarence   | Robinson  | 1             | 3617   | 2            |
+        | 3  | Eugene     | Philips   | 1             | 4877   | 2            |
+        | 4  | Philip     | Mitchell  | 1             | 5259   | 3            |
+        | 5  | Ann        | Wright    | 2             | 2094   | 5            |
+        | 6  | Charles    | Wilson    | 2             | 5167   | 5            |
+        | 7  | Russell    | Johnson   | 2             | 3762   | 4            |
+        | 8  | Jacqueline | Cook      | 2             | 6923   | 3            |
+
+        Write a query to display employees whose annual salary is less than 400000. 
+        SELECT *, salary*12 FROM employees WHERE salary*12 <= 800000;
+        
+        | id | first_name | last_name | department_id | salary | years_worked | salary*12 |
+        |----|------------|-----------|---------------|--------|--------------|-----------|
+        | 1  | Diane      | Turner    | 1             | 5330   | 4            | 63960     |
+        | 2  | Clarence   | Robinson  | 1             | 3617   | 2            | 43404     |
+        | 3  | Eugene     | Philips   | 1             | 4877   | 2            | 58524     |
+        | 4  | Philip     | Mitchell  | 1             | 5259   | 3            | 63108     |
+        | 5  | Ann        | Wright    | 2             | 2094   | 5            | 25128     |
+        | 6  | Charles    | Wilson    | 2             | 5167   | 5            | 62004     |
+        | 7  | Russell    | Johnson   | 2             | 3762   | 4            | 45144     |
+        | 8  | Jacqueline | Cook      | 2             | 6923   | 3            | 83076     |
+
+Logical Operator
+-----------------
+-Logical operators are used to combine multiple and they return a Boolean value.
+-Types of logical operator:
+-AND:
+---If all the conditions are TRUE then it returns true otherwise false.
+-OR:
+---If all the conditions are FALSE then it returns FALSE otherwise true.
+-NOT:
+---Reverses the Boolean value of a condition
+Example:
+        Display employee who belongs to department_id=1 and Salary is more than 5000. 
+        SELECT * FROM employees WHERE department_id= 1 and salary=5000;
+        
+        | id | first_name | last_name | department_id | salary | years_worked |
+        |----|------------|-----------|---------------|--------|--------------|
+        | 1  | Diane      | Turner    | 1             | 5330   | 4            |
+        | 4  | Philip     | Mitchell  | 1             | 5259   | 3            |
+
+        Write an SQL query to display employees whose salary is between 70000 and 80000 (inclusive].
+        SELECT * FROM employees 
+        WHERE salary>=70000 AND salary<=80000;
+
+        Write an SQL query to list all employees whose salary does not fall within the range of 70,000 to 80,000 (inclusive).
+        SELECT * FROM employees 
+        WHERE salary<=70000 OR salary>=80000;
+        
+        Write a query to list all employees working in either the IT or HR department.
+        SELECT *
+        FROM employees
+        WHERE department = 'IT' OR department = 'HR';
+        
+        Write a SQL query to display all employees whose department is neither IT nor HR.
+        SELECT *
+        FROM employees
+        WHERE department != 'IT' AND department != 'HR';
+
+IN Operator 
+-----------
+-It is used to pick the values one by one from list of values. 
+-We can use in operator in place of OR operator when we are extracting multiple values from same column. 
+-We can use this with any column irrespective of data types. 
+Syntax: 
+      SELECT * FROM <table_name> WHERE <column_name> in (list of values); 
+Example:
+        Write a query to display the employees who are belong to IT, HR departments. 
+        SELECT *
+        FROM employees
+        WHERE department IN ('IT', 'HR');
+        
+        Write a query to display the employees who are not belongs to IT, HR departments. 
+        SELECT *
+        FROM employees
+        WHERE department NOT IN ('IT', 'HR');
+
+BETWEEN AND operator 
+--------------------
+-It is used to select range of values including lower bound and upper bound value. 
+Syntax: 
+      SELECT * FROM <table_name> WHERE <column_name> BETWEEN <lowvalue> AND <highvalue>;
+
+Example:
+        Write an SQL query to display employees whose salary is between 70000 and 80000 (inclusive].
+        SELECT * FROM employees WHERE salary BETWEEN 70000 AND 80000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
