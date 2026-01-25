@@ -1,0 +1,83 @@
+Hard Delete
+-----------
+-Completely removes the data from the database.
+-Not recoverable once deleted.
+-No trace of deleted data.
+-Frees up storage space.
+Sql:
+    DELETE FROM students WHERE id = 1;
+
+Soft Delete
+-----------
+-Marks data as deleted (e.g., is_deleted = true) but keeps it in the database.
+-Easy to recover.
+-We can trace deleted data.
+-Increases database size over time.
+Sql:
+    ALTER TABLE students ADD is_deleted int;
+    UPDATE students SET is_deleted = 1;
+    SELECT * FROM students WHERE is_deleted =1; 
+    UPDATE students SET flag=0 WHERE id=1;
+
+Create Table from another existing Table
+----------------------------------------
+Approach1: (Create Table with Data) 
+Sql:
+    CREATE TABLE Student_Details AS SELECT * FROM user;
+    SELECT * FROM Student_Details;
+
+    | [id] | [name]  | [age] |
+    |  1   | Ghadai  |  30   |
+    |  2   | Akash   |  30   |
+    |  3   | Ashu    |  30   |
+    |  4   | Abhi    |  30   |
+    |  5   | Biswa   |  30   |
+
+Approach2: (Create Table without Data)
+Sql:
+    CREATE TABLE Student_Details2 AS SELECT * FROM user where 1=2;
+    SELECT * FROM Student_Details2;
+
+    | [id] | [name]  | [age] |
+              OR
+Sql:
+    CREATE TABLE Student_Details3 LIKE user;
+    SELECT * FROM Student_Details3;
+
+    | [id] | [name]  | [age] |
+
+Copy data with INSERT INTO … SELECT Command
+-------------------------------------------
+-We can copy data from one to another using INSERT INTO … SELECT command.
+Sql:
+    INSERT INTO Student_Details2 SELECT * FROM user;
+    SELECT * FROM Student_Details2;
+    
+    | [id] | [name]  | [age] |
+    |  1   | Ghadai  |  30   |
+    |  2   | Akash   |  30   |
+    |  3   | Ashu    |  30   |
+    |  4   | Abhi    |  30   |
+    |  5   | Biswa   |  30   |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
