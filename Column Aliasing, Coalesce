@@ -1,0 +1,108 @@
+Load Data from CSV file into Database Table
+-------------------------------------------
+Example#1: 
+          -Load the `employee3.csv` file into a table named `employees`. Ensure the header row is ignored. 
+          -Load data from MySQL workbench
+          -Go to MySQL Workbench 🡪 Right click on database 🡪 Click on Table Data Import Wizard.
+
+Column Aliasing
+---------------
+-An alias is a temporary name assigned to a table or a column in a query.
+-Alias is temporary and only exists for the duration of the query.
+-Alias name can be given after column name with or without AS key word. 
+-If alias name contains multiple words, then enclosed with in double quote or single quote or back tick because space is not allowed in name. 
+
+Example#2:
+Show “department” as “Dept” and “hire_date” as “Joining_Date”.
+
+Sql:
+    SELECT first_name AS Emp_Name, salary AS Money FROM employees;
+    | Emp_Name  | Money |
+    |-----------|-------|
+    | Diane     | 5330  |
+    | Clarence  | 3617  |
+    | Eugene    | 4877  |
+    | Philip    | 5259  |
+    | Ann       | 2094  |
+    | Charles   | 5167  |
+    | Russell   | 3762  |
+    | Jacqueline| 6923  |
+
+Working with NULL Values
+-------------------------
+-Represents missing, unknown, or inapplicable data.
+-We can get record with null values using IS NULL, IS NOT NULL.
+-We can handle missing values using COALESCE.
+
+IS NULL / IS NOT NULL 
+---------------------
+-It is used to test whether a column having null value or not. 
+Syntax: 
+        SELECT * FROM table_name WHERE column_name IS NULL; 
+        SELECT * FROM table_name WHERE column_name IS NOT NULL;
+
+Example:
+Find all employees where id IS NULL.
+        SELECT * FROM employees WHERE id IS NULL;
+
+        | id | first_name | last_name | department_id | salary | years_worked |
+
+Write a query to update salary  as 6000 where department_id  is null.
+        UPDATE employees SET salary = 6000 WHERE department_id IS NULL;
+
+Write a query to delete record where department_id is null. 
+        DELETE FROM employees WHERE department_id IS NULL;
+
+COALESCE Function
+-----------------
+-COALESCE() returns the first non-NULL value from a list of expressions.
+
+-Evaluates expressions from left to right
+-Returns the first NOT NULL value
+-If all values are NULL, it returns NULL
+-Commonly used to handle NULL values and provide default values
+
+Syntax:
+      COALESCE(expr1, expr2, expr3, ...)
+
+Example 1:
+      SELECT COALESCE(1, 2, NULL);
+➡Output: 1
+➡ First value 1 is NOT NULL, so it is returned.
+
+Example 2:
+      SELECT COALESCE(NULL, 1, 2);
+➡ Output: 1
+➡ NULL is skipped, next non-NULL value is 1.
+
+Example 3:
+      SELECT COALESCE(NULL, NULL, 1);
+➡ Output: 1
+➡ First two values are NULL, third value 1 is returned.
+
+Example 4:
+      SELECT COALESCE(NULL, NULL, NULL);
+➡ Output: NULL
+➡ All values are NULL, so result is NULL
+
+Example:
+      Replace NULL department values with `NA` using `COALESCE`.
+      SELECT coalesce(department_id, 'NA') FROM employees;  -- if any department_id=Null then it assign NA.
+
+      Write a query that calculates each employee’s total compensation by adding their salary to their bonus.
+      SELECT emp_id, salary, bonus, salary + bonus AS total_compension FROM employees;
+
+      SELECT emp_id, salary, bonus, salary + coalesce(bonus, 0) AS total_compension FROM employees;
+
+
+
+
+
+
+
+
+
+
+
+
+
