@@ -1,0 +1,156 @@
+Order by Clause
+---------------
+-The order by clause is used to sort the result set of query by one or more column.
+
+-It can sort the results in ascending or descending order.
+
+-We will use ASC for ascending order and DESC for descending order.
+
+-If we don’t specify sort order, the default sort order is ascending.
+
+Syntax:-
+--------
+        SELECT * FROM tablename ORDER BY columnname [ASC/DESC]
+        SELECT * FROM tablename ORDER BY col1[ASC/DESC], col2[ASC/DESC]
+
+        
+        Single column ascending order
+        -----------------------------
+Sql:
+        SELECT * FROM Employees ORDER BY id;
+        SELECT * FROM Employees ORDER BY id ASC;
+
+  | id | first_name | last_name | department_id | salary | years_worked |
+  |----|------------|-----------|---------------|--------|--------------|
+  | 2  | Clarence   | Robinson  | 1             | 3617   | 2            |
+  | 3  | Eugene     | Phillips  | 1             | 4877   | 2            |
+  | 4  | Philip     | Mitchell  | 1             | 5259   | 3            |
+  | 5  | Ann        | Wright    | 2             | 2094   | 5            |
+  | 6  | Charles    | Wilson    | 2             | 5167   | 5            |
+  | 7  | Russell    | Johnson   | 2             | 3762   | 4            |
+  | 8  | Jacqueline | Cook      | 2             | 6923   | 3            |
+  | 9  | Larry      | Lee       | 3             | 2796   | 4            |
+  | 10 | Willie     | Patterson | 3             | 4771   | 5            |
+  | 11 | Janet      | Ramirez   | 3             | 3782   | 2            |
+  | 12 | Doris      | Bryant    | 3             | 6419   | 1            |
+  | 13 | Amy        | Williams  | 3             | 6261   | 1            |
+  | 14 | Keith      | Scott     | 3             | 4928   | 8            |
+  | 15 | Karen      | Morris    | 4             | 6347   | 6            |
+  | 16 | Kathy      | Sanders   | 4             | 6286   | 1            |
+  | 17 | Joe        | Thompson  | 5             | 5639   | 3            |
+  | 18 | Barbara    | Clark     | 5             | 3232   | 1            |
+  | 19 | Todd       | Bell      | 5             | 4653   | 1            |
+  | 20 | Ronald     | Butler    | 5             | 2076   | 5            |
+
+  Single column descending order
+  ------------------------------
+Sql:
+----
+  SELECT * FROM Employees ORDER BY id DESC;
+  
+  | id | first_name | last_name | department_id | salary | years_worked |
+  |----|------------|-----------|---------------|--------|--------------|
+  | 20 | Ronald     | Butler    | 5             | 2076   | 5            |
+  | 19 | Todd       | Bell      | 5             | 4653   | 1            |
+  | 18 | Barbara    | Clark     | 5             | 3232   | 1            |
+  | 17 | Joe        | Thompson  | 5             | 5639   | 3            |
+  | 16 | Kathy      | Sanders   | 4             | 6286   | 1            |
+  | 15 | Karen      | Morris    | 4             | 6347   | 6            |
+  | 14 | Keith      | Scott     | 3             | 4928   | 8            |
+  | 13 | Amy        | Williams  | 3             | 6261   | 1            |
+  | 12 | Doris      | Bryant    | 3             | 6419   | 1            |
+  | 11 | Janet      | Ramirez   | 3             | 3782   | 2            |
+  | 10 | Willie     | Patterson | 3             | 4771   | 5            |
+  | 9  | Larry      | Lee       | 3             | 2796   | 4            |
+  | 8  | Jacqueline | Cook      | 2             | 6923   | 3            |
+  | 7  | Russell    | Johnson   | 2             | 3762   | 4            |
+  | 6  | Charles    | Wilson    | 2             | 5167   | 5            |
+  | 5  | Ann        | Wright    | 2             | 2094   | 5            |
+  | 4  | Philip     | Mitchell  | 1             | 5259   | 3            |
+  | 3  | Eugene     | Phillips  | 1             | 4877   | 2            |
+  | 2  | Clarence   | Robinson  | 1             | 3617   | 2            |
+  | 1  | Diane      | Turner    | 1             | 5330   | 4            |
+
+  Multiple column
+  ---------------
+  - In this case data will be sorted based on first column. If the first 
+    column contains duplicate data then that group only sorted using second column.
+
+  Sql:
+      SELECT * FROM Employees ORDER BY first_name ASC , salary DESC;
+      
+      | id | first_name | last_name | department_id | salary | years_worked |
+      |----|------------|-----------|---------------|--------|--------------|
+      | 13 | Amy        | Williams  | 3             | 6261   | 1            |
+      | 5  | Ann        | Wright    | 2             | 2094   | 5            |
+      | 18 | Barbara    | Clark     | 5             | 3232   | 1            |
+      | 6  | Charles    | Wilson    | 2             | 5167   | 5            |
+      | 2  | Clarence   | Robinson  | 1             | 3617   | 2            |
+      | 1  | Diane      | Turner    | 1             | 5330   | 4            |
+      | 12 | Doris      | Bryant    | 3             | 6419   | 1            |
+      | 3  | Eugene     | Phillips  | 1             | 4877   | 2            |
+      | 8  | Jacqueline | Cook      | 2             | 6923   | 3            |
+      | 11 | Janet      | Ramirez   | 3             | 3782   | 2            |
+      | 17 | Joe        | Thompson  | 5             | 5639   | 3            |
+      | 15 | Karen      | Morris    | 4             | 6347   | 6            |
+      | 16 | Kathy      | Sanders   | 4             | 6286   | 1            |
+      | 14 | Keith      | Scott     | 3             | 4928   | 8            |
+      | 9  | Larry      | Lee       | 3             | 2796   | 4            |
+      | 4  | Philip     | Mitchell  | 1             | 5259   | 3            |
+      | 20 | Ronald     | Butler    | 5             | 2076   | 5            |
+      | 7  | Russell    | Johnson   | 2             | 3762   | 4            |
+      | 19 | Todd       | Bell      | 5             | 4653   | 1            |
+      | 10 | Willie     | Patterson | 3             | 4771   | 5            |
+
+Sql:
+    SELECT first_name, department_id, salary FROM employees ORDER BY first_name ASC, 
+    department_id DESC, salary DESC;
+
+Note
+-----
+  SQL sorts by the first column, and only if there are duplicates does it move to the 
+  next column, and so on.
+
+OUTPUT
+------
+| first_name | department_id | salary |
+|------------|---------------|--------|
+| Amy        | 3             | 6261   |
+| Ann        | 2             | 2094   |
+| Barbara    | 5             | 3232   |
+| Charles    | 2             | 5167   |
+| Clarence   | 1             | 3617   |
+| Diane      | 1             | 5330   |
+| Doris      | 3             | 6419   |
+| Eugene     | 1             | 4877   |
+| Jacqueline | 2             | 6923   |
+| Janet      | 3             | 3782   |
+| Joe        | 5             | 5639   |
+| Karen      | 4             | 6347   |
+| Kathy      | 4             | 6286   |
+| Keith      | 3             | 4928   |
+| Larry      | 3             | 2796   |
+| Philip     | 1             | 5259   |
+| Ronald     | 5             | 2076   |
+| Russell    | 2             | 3762   |
+| Todd       | 5             | 4653   |
+| Willie     | 3             | 4771   |
+
+
+Questions for interview
+-----------------------
+Scenario#1
+Your manager wants to evaluate employees for promotion. To do this, they need a list of 
+all employees ordered by their seniority, starting from the most senior to the most junior.
+Write an SQL query to display all employees sorted by their hire date in ascending order. 
+
+Sql:
+    SELECT employee_id, name, department, hire_date
+    FROM employee
+    WHERE hire_date IS NOT NULL
+    ORDER BY hire_date ASC;
+
+
+
+
+
