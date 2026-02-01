@@ -62,11 +62,15 @@ Example:
 
 Note: 
 -----
--By default, when using the ALTER TABLE statement to add a new column to a table, the column is added at the end of the existing column list.
+-By default, when using the ALTER TABLE statement to add a new column to a 
+table, the column is added at the end of the existing column list.
+
 -To add new column at the beginning.
 Sql-  
     ALTER TABLE students ADD id int(10) FIRST;
--To add a new column at a specific position within the table, use the AFTER keyword followed by the name of the existing column.
+-To add a new column at a specific position within the table, use the AFTER 
+keyword followed by the name of the existing column.
+
 Sql-
     ALTER TABLE students ADD age int(3) AFTER lastname;
 
