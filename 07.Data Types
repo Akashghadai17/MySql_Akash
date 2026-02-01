@@ -33,8 +33,10 @@ Char Data Type
 -It is used to store fixed length alpha-numeric data. 
 Syntax:
       column_name char(size) 
--When we are trying to store less number of characters than the size specified in char data type then MySQL server internally adds blank space in place of remaining
+-When we are trying to store less number of characters than the size specified 
+in char data type then MySQL server internally adds blank space in place of remaining
 character. 
+
 Example:
         CREATE TABLE Employee(
         		name char(20)
@@ -75,7 +77,9 @@ Example:
 
 Text data type 
 --------------
--It is used to store large amounts of textual data such as article content, comments, or forum posts etc. 
+-It is used to store large amounts of textual data such as article content, 
+ comments, or forum posts etc. 
+
 Syntax:
        column_name text
 -Size is not applicable. If we are providing size explicitly then MySQL will ignore.
@@ -153,7 +157,9 @@ Example:
 
 int data type 
 -------------
--It is used to store integers only. It does not store floating point (number with decimal value) number. 
+-It is used to store integers only. It does not store floating point 
+(number with decimal value) number. 
+
 Syntax:
        column_name int 
 Example:
