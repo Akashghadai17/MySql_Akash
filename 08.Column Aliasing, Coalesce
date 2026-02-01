@@ -1,16 +1,20 @@
 Load Data from CSV file into Database Table
 -------------------------------------------
 Example#1: 
-          -Load the `employee3.csv` file into a table named `employees`. Ensure the header row is ignored. 
+          -Load the `employee3.csv` file into a table named `employees`. 
+          Ensure the header row is ignored. 
+
           -Load data from MySQL workbench
-          -Go to MySQL Workbench 🡪 Right click on database 🡪 Click on Table Data Import Wizard.
+          -Go to MySQL Workbench 🡪 Right click on database 🡪 Click on 
+           Table Data Import Wizard.
 
 Column Aliasing
 ---------------
 -An alias is a temporary name assigned to a table or a column in a query.
 -Alias is temporary and only exists for the duration of the query.
 -Alias name can be given after column name with or without AS key word. 
--If alias name contains multiple words, then enclosed with in double quote or single quote or back tick because space is not allowed in name. 
+-If alias name contains multiple words, then enclosed with in double quote 
+ or single quote or back tick because space is not allowed in name. 
 
 Example#2:
 Show “department” as “Dept” and “hire_date” as “Joining_Date”.
