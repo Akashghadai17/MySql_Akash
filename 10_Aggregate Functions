@@ -1,0 +1,196 @@
+Aggregate Functions
+-------------------
+-Aggregate functions perform a calculation on a set of values and return a single value.
+-Aggregate Functions: count, sum, avg, max, min.
+
+1)COUNT
+--------
+-COUNT (*): 
+--It counts all rows in the table, regardless of null values.
+
+-COUNT (column_name): 
+--It counts the not NULL values in a specific column.
+
+Examples
+---------
+
+CREATE TABLE student (
+	name varchar(30), 
+    	address varchar(100), 
+    	age int
+);
+
+INSERT INTO student VALUES ('Ram', 'BBSR', 30), 
+('Alok', 'BBSR', null),
+('Raj', null, null),
+(null, null, null);
+
+Count example:
+-------------
+-Select count(age) from student;
+
+| count(age) |
+|------------|
+| 1          |
+
+-select count(*) as Total From student; -- It show how any rows
+
+|    Total   |
+|------------|
+| 4          |
+
+-SELECT count(name,address,age) FROM student; --multiple columns not allowed(ERROR)
+
+2)SUM()
+-------
+-The SUM () function calculates the total sum of a numeric column. 
+-It ignores NULL values.
+
+Example1:
+        Write an SQL query to calculate the total salary of employees.
+Sql:
+        SELECT SUM(salary) AS Total_Salary FROM employee;
+
+        |    Total_Salary   |
+        |-------------------|
+        | 94219             |
+
+Example2:
+---------
+        Write an SQL query to calculate the total salary of employees working in the 'IT' department.
+Sql:    
+       SELECT SUM(salary) As Total_Salary FROM Employees where department_id=1;
+
+        |    Total_Salary   |
+        |-------------------|
+        | 19083             |
+
+Example3:
+--------
+        Write an SQL query to calculate the total salary of employees working in the 'IT' or ‘HR’ department.
+SQL:
+       SELECT SUM(salary) As Total_Salary FROM Employees where department_id IN(1,2);
+   
+        |    Total_Salary   |
+        |-------------------|
+        | 37029             |
+
+Example4:
+---------
+        Write an SQL query to calculate the total salary of employees working in the 'IT' and ‘HR’ department.
+Sql:
+        SELECT SUM(salary) As Total_Salary FROM Employees where department_id=1 AND department_id=2 ;
+
+        |    Total_Salary   |
+        |-------------------|
+        | 37029             |
+
+3)AVG()
+-------
+-The AVG () function calculates the average value of a numeric column. It ignores NULL values.
+
+Example1:
+--------
+        Write an SQL query to calculate the average salary of employees.
+
+Sql:
+        SELECT AVG(salary) As Average_Salary FROM Employees;
+
+        |   Average_Salary  |
+        |-------------------|
+        | 4710.9500         |
+
+Example2:
+---------
+         Write an SQL query to calculate the average salary of employees working in the 'IT' department.
+Sql:
+         SELECT avg(salary) AS Average_Salary FROM Employees where department_id=1;
+
+        |   Average_Salary  |
+        |-------------------|
+        | 4770.7500         |
+
+4)MAX()
+-------
+-The MAX() function returns the maximum value in a set of values. 
+-It can be used with numeric, string, or date/time data types. 
+-It ignores NULL values.
+
+Example1:
+--------
+          Write an SQL query to find the max salary.
+Sql: 
+          SELECT MAX(salary) AS Max_Sal FROM Employees;
+
+        |   Max_Sal         |
+        |-------------------|
+        | 6923              |
+
+Example2:
+---------
+         Write an SQL query to find latest hire date from the employee table.
+Sql:
+         SELECT MAX(hire_date) AS "New Joinee" FROM employees;
+
+Example3:
+---------
+         Write a query to find the latest version based on version codes.
+Sql:
+          SELECT MAX(version_code) FROM app;
+
+5)MIN()
+-------
+Example1:
+---------
+        Write an SQL query to find the minimum salary.
+Sql:
+       SELECT MIN(salary) AS "Min Salary" FROM employees;
+
+        |   Min Salary      |
+        |-------------------|
+        | 2076              |
+
+
+Example2:
+---------
+        Write an SQL query to find oldest hire date from the employee table.
+Sql:
+      SELECT MIN(hire_date) AS "Old Joinee" FROM employee;
+
+Example3:
+--------
+      Write a query to find the lowest version based on version codes.
+Sql:
+      SELECT MIN(version_code) FROM app;
+
+NOTE1:
+-----
+      We can not use aggregate column and non aggregate column in SELECT query without group by.
+Sql:
+      SELECT first_name, SUM(salary) FROM employees; -- Error
+
+NOTE2:
+-----
+      We can use multiple aggregate column.
+Sql:
+      SELECT SUM(salary), MAX(salary), MIN(salary) FROM employees WHERE department_id=1;
+
+      | SUM(salary) | MAX(salary) | MIN(salary) |
+      |-------------|-------------|-------------|
+      | 19083       | 5330        | 3617        |
+
+
+
+
+
+       
+
+
+
+
+
+
+
+
+
+
