@@ -1,0 +1,65 @@
+DISTINCT
+--------
+-Distinct is used return only unique values.
+-It removes duplicate record from the result set.
+
+Example:
+        select * from student;
+
+        | name | address | age  |
+        |------|---------|------|
+        | Ram  | BBSR    | 30   |
+        | Alok | BBSR    | NULL |
+        | Raj  | NULL    | NULL |
+        | NULL | NULL    | NULL |
+
+Example:
+---------
+Sql:
+    Select distinct address FROM student;
+
+    | address |
+    |---------|
+    | BBSR    |
+    | NULL    |
+
+Sql: 
+    SELECT COUNT(distinct address) FROM STUDENT;
+
+    | COUNT(distinct address) |
+    |-------------------------|
+    | 1                       |
+Sql:
+    SELECT distinct address, age FROM student;
+
+    | address | age  |
+    |---------|------|
+    | BBSR    | 30   |
+    | BBSR    | NULL |
+    | NULL    | NULL |
+
+Sql:
+    SELECT COUNT(*) FROM ( SELECT distinct address, age FROM student) as unique_count;
+
+    | COUNT(*) |
+    |----------|
+    | 4        |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
