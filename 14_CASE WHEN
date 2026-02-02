@@ -1,0 +1,142 @@
+CASE WHEN
+---------
+
+-The CASE WHEN statement is used to perform conditional logic and return a specific value based on conditions.
+Syntax:
+        CASE
+          WHEN condition1 THEN result1
+          [WHEN condition2 THEN result2]
+          ...
+         …..
+          [ELSE resultN]
+        END
+
+Question1:
+----------
+-Write a query to find salary group based on age. If salary is greater than 80,000 then display “High”, otherwise “Low”.
+
+Sql:
+    SELECT *, 
+    CASE 
+    	WHEN salary > 80000 THEN 'High'
+        ELSE 'Low'
+    END AS "Salary Group"
+    FROM employees;
+
+    | id | first_name | last_name | department_id | salary | years_worked | Salary Group |
+    |----|------------|-----------|---------------|--------|--------------|--------------|
+    | 1  | Diane      | Turner    | 1             | 5330   | 4            | Low          |
+    | 2  | Clarence   | Robinson  | 1             | 3617   | 2            | Low          |
+    | 3  | Eugene     | Phillips  | 1             | 4877   | 2            | Low          |
+    | 4  | Philip     | Mitchell  | 1             | 5259   | 3            | Low          |
+    | 5  | Ann        | Wright    | 2             | 2094   | 5            | Low          |
+    | 6  | Charles    | Wilson    | 2             | 5167   | 5            | Low          |
+    | 7  | Russell    | Johnson   | 2             | 3762   | 4            | Low          |
+    | 8  | Jacqueline | Cook      | 2             | 6923   | 3            | Low          |
+    | 9  | Larry      | Lee       | 3             | 2796   | 4            | Low          |
+    | 10 | Willie     | Patterson | 3             | 4771   | 5            | Low          |
+    | 11 | Janet      | Ramirez   | 3             | 3782   | 2            | Low          |
+    | 12 | Doris      | Bryant    | 3             | 6419   | 1            | Low          |
+    | 13 | Amy        | Williams  | 3             | 6261   | 1            | Low          |
+    | 14 | Keith      | Scott     | 3             | 4928   | 8            | Low          |
+    | 15 | Karen      | Morris    | 4             | 6347   | 6            | Low          |
+    | 16 | Kathy      | Sanders   | 4             | 6286   | 1            | Low          |
+    | 17 | Joe        | Thompson  | 5             | 5639   | 3            | Low          |
+    | 18 | Barbara    | Clark     | 5             | 3232   | 1            | Low          |
+    | 19 | Todd       | Bell      | 5             | 4653   | 1            | Low          |
+    | 20 | Ronald     | Butler    | 5             | 2076   | 5            | Low          |
+
+Question2:
+----------
+  Write a query to find salary group based on age. If salary is greater than 80,000 then display 
+  “High”, if salary greater than 5000 then display "Medium" otherwise “Low”.
+
+Sql:
+    SELECT *,
+    CASE 
+        WHEN salary>80000 THEN 'High'
+        WHEN salary>5000 THEN 'Medium'
+        ELSE 'Low'
+    END AS "SALARY GROUP" FROM employees;
+
+    | id | first_name | last_name | department_id | salary | years_worked | SALARY GROUP |
+    |----|------------|-----------|---------------|--------|--------------|--------------|
+    | 1  | Diane      | Turner    | 1             | 5330   | 4            | Medium       |
+    | 2  | Clarence   | Robinson  | 1             | 3617   | 2            | Low          |
+    | 3  | Eugene     | Phillips  | 1             | 4877   | 2            | Low          |
+    | 4  | Philip     | Mitchell  | 1             | 5259   | 3            | Medium       |
+    | 5  | Ann        | Wright    | 2             | 2094   | 5            | Low          |
+    | 6  | Charles    | Wilson    | 2             | 5167   | 5            | Medium       |
+    | 7  | Russell    | Johnson   | 2             | 3762   | 4            | Low          |
+    | 8  | Jacqueline | Cook      | 2             | 6923   | 3            | Medium       |
+    | 9  | Larry      | Lee       | 3             | 2796   | 4            | Low          |
+    | 10 | Willie     | Patterson | 3             | 4771   | 5            | Low          |
+    | 11 | Janet      | Ramirez   | 3             | 3782   | 2            | Low          |
+    | 12 | Doris      | Bryant    | 3             | 6419   | 1            | Medium       |
+    | 13 | Amy        | Williams  | 3             | 6261   | 1            | Medium       |
+    | 14 | Keith      | Scott     | 3             | 4928   | 8            | Low          |
+    | 15 | Karen      | Morris    | 4             | 6347   | 6            | Medium       |
+    | 16 | Kathy      | Sanders   | 4             | 6286   | 1            | Medium       |
+    | 17 | Joe        | Thompson  | 5             | 5639   | 3            | Medium       |
+    | 18 | Barbara    | Clark     | 5             | 3232   | 1            | Low          |
+    | 19 | Todd       | Bell      | 5             | 4653   | 1            | Low          |
+    | 20 | Ronald     | Butler    | 5             | 2076   | 5            | Low          |
+
+Question3:
+----------
+  Write a query to find salary group based on salary. If salary is greater than 80000 then display 
+  “High”, if salary is greater than 60000, then display “Average” otherwise “Low”.
+
+Sql:
+    SELECT *,
+    CASE
+    	WHEN salary > 80000 THEN "High"
+        WHEN salary > 60000 THEN "Average"
+        ELSE "Low"
+    END AS "SALARY GROUP" FROM EMPLOYEES;
+
+    | id | first_name | last_name | department_id | salary | years_worked | Salary Group |
+    |----|------------|-----------|---------------|--------|--------------|--------------|
+    | 1  | Diane      | Turner    | 1             | 5330   | 4            | Low          |
+    | 2  | Clarence   | Robinson  | 1             | 3617   | 2            | Low          |
+    | 3  | Eugene     | Phillips  | 1             | 4877   | 2            | Low          |
+    | 4  | Philip     | Mitchell  | 1             | 5259   | 3            | Low          |
+    | 5  | Ann        | Wright    | 2             | 2094   | 5            | Low          |
+    | 6  | Charles    | Wilson    | 2             | 5167   | 5            | Low          |
+    | 7  | Russell    | Johnson   | 2             | 3762   | 4            | Low          |
+    | 8  | Jacqueline | Cook      | 2             | 6923   | 3            | Low          |
+    | 9  | Larry      | Lee       | 3             | 2796   | 4            | Low          |
+    | 10 | Willie     | Patterson | 3             | 4771   | 5            | Low          |
+    | 11 | Janet      | Ramirez   | 3             | 3782   | 2            | Low          |
+    | 12 | Doris      | Bryant    | 3             | 6419   | 1            | Low          |
+    | 13 | Amy        | Williams  | 3             | 6261   | 1            | Low          |
+    | 14 | Keith      | Scott     | 3             | 4928   | 8            | Low          |
+    | 15 | Karen      | Morris    | 4             | 6347   | 6            | Low          |
+    | 16 | Kathy      | Sanders   | 4             | 6286   | 1            | Low          |
+    | 17 | Joe        | Thompson  | 5             | 5639   | 3            | Low          |
+    | 18 | Barbara    | Clark     | 5             | 3232   | 1            | Low          |
+    | 19 | Todd       | Bell      | 5             | 4653   | 1            | Low          |
+    | 20 | Ronald     | Butler    | 5             | 2076   | 5            | Low          |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
