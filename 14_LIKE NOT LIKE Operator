@@ -1,0 +1,221 @@
+LIKE / NOT LIKE Operator 
+------------------------
+LIKE
+----
+
+-It is used to retrieve data based on specified pattern in where clause. 
+-There are 2 special character/ wild card character 
+   % - Zero Character/ Multiple Character 
+   _ (underscore) / exactly one character
+
+Syntax :
+        SELECT * FROM tablename WHERE columnname LIKE 'character pattern' 
+
+        SELECT * FROM employees;
+        | id | first_name | last_name | department_id | salary | years_worked |
+        |----|------------|-----------|---------------|--------|--------------|
+        | 1  | Diane      | Turner    | 1             | 5330   | 4            |
+        | 2  | Clarence   | Robinson  | 1             | 3617   | 2            |
+        | 3  | Eugene     | Phillips  | 1             | 4877   | 2            |
+        | 4  | Philip     | Mitchell  | 1             | 5259   | 3            |
+        | 5  | Ann        | Wright    | 2             | 2094   | 5            |
+        | 6  | Charles    | Wilson    | 2             | 5167   | 5            |
+        | 7  | Russell    | Johnson   | 2             | 3762   | 4            |
+        | 8  | Jacqueline | Cook      | 2             | 6923   | 3            |
+        | 9  | Larry      | Lee       | 3             | 2796   | 4            |
+        | 10 | Willie     | Patterson | 3             | 4771   | 5            |
+        | 11 | Janet      | Ramirez   | 3             | 3782   | 2            |
+        | 12 | Doris      | Bryant    | 3             | 6419   | 1            |
+        | 13 | Amy        | Williams  | 3             | 6261   | 1            |
+        | 14 | Keith      | Scott     | 3             | 4928   | 8            |
+        | 15 | Karen      | Morris    | 4             | 6347   | 6            |
+        | 16 | Kathy      | Sanders   | 4             | 6286   | 1            |
+        | 17 | Joe        | Thompson  | 5             | 5639   | 3            |
+        | 18 | Barbara    | Clark     | 5             | 3232   | 1            |
+        | 19 | Todd       | Bell      | 5             | 4653   | 1            |
+        | 20 | Ronald     | Butler    | 5             | 2076   | 5            |
+
+Example:
+
+-Write a query to display all employees whose names starting with ‘A’ but can ends with anything.
+Sql:
+    SELECT * FROM employees where first_name like 'A%';
+
+        | id | first_name | last_name | department_id | salary | years_worked |
+        |----|------------|-----------|---------------|--------|--------------|
+        | 5  | Ann        | Wright    | 2             | 2094   | 5            |
+        | 13 | Amy        | Williams  | 3             | 6261   | 1            |
+
+-Write a query to display all employees whose names ends with 'h' but can starts with anything.
+Sql:
+    SELECT  * FROM employees where first_name LIKE '%h';
+        | id | first_name | last_name | department_id | salary | years_worked |
+        |----|------------|-----------|---------------|--------|--------------|
+        | 14 | Keith      | Scott     | 3             | 4928   | 8            |
+
+-Write a query to display all employees whose names contains 'c' in any positions. 
+ (e.g. anything before c, anything after c)
+Sql:
+    SELECT  * FROM employees where first_name LIKE '%c%';
+        | id | first_name | last_name | department_id | salary | years_worked |
+        |----|------------|-----------|---------------|--------|--------------|
+        | 2  | Clarence   | Robinson  | 1             | 3617   | 2            |
+        | 6  | Charles    | Wilson    | 2             | 5167   | 5            |
+        | 8  | Jacqueline | Cook      | 2             | 6923   | 3            |
+
+-Write a query to display all employees whose  name contains ‘a’ in second place. 
+Sql:
+    SELECT  * FROM employees where first_name LIKE '_a%';
+        | id | first_name | last_name | department_id | salary | years_worked |
+        |----|------------|-----------|---------------|--------|--------------|
+        | 8  | Jacqueline | Cook      | 2             | 6923   | 3            |
+        | 9  | Larry      | Lee       | 3             | 2796   | 4            |
+        | 11 | Janet      | Ramirez   | 3             | 3782   | 2            |
+        | 15 | Karen      | Morris    | 4             | 6347   | 6            |
+        | 16 | Kathy      | Sanders   | 4             | 6286   | 1            |
+        | 18 | Barbara    | Clark     | 5             | 3232   | 1            |
+
+-Write a query to display all employees whose names contains 'an' or ‘ld’ in any positions. 
+Sql:
+    SELECT  * FROM employees where first_name LIKE '%an%' OR first_name LIKE '%ld%';
+        | id | first_name | last_name | department_id | salary | years_worked |
+        |----|------------|-----------|---------------|--------|--------------|
+        | 1  | Diane      | Turner    | 1             | 5330   | 4            |
+        | 5  | Ann        | Wright    | 2             | 2094   | 5            |
+        | 11 | Janet      | Ramirez   | 3             | 3782   | 2            |
+        | 20 | Ronald     | Butler    | 5             | 2076   | 5            |
+
+
+
+SELECT * FROM visit;
+| id | doctor_id | visit_date | patient_id |
+|----|-----------|------------|------------|
+| 1  | 5         | 20-02-2020 | 1          |
+| 2  | 4         | 20-02-2020 | 5          |
+| 3  | 3         | 20-02-2020 | 2          |
+| 4  | 6         | 20-02-2020 | 2          |
+| 5  | 1         | 20-02-2020 | 6          |
+| 6  | 3         | 20-02-2020 | 1          |
+| 7  | 2         | 21-02-2020 | 4          |
+| 8  | 5         | 21-02-2020 | 3          |
+| 9  | 3         | 21-02-2020 | 7          |
+| 10 | 7         | 21-02-2020 | 9          |
+| 11 | 1         | 21-02-2020 | 1          |
+| 12 | 9         | 21-02-2020 | 10         |
+| 13 | 2         | 21-02-2020 | 8          |
+| 14 | 5         | 21-02-2020 | 5          |
+| 15 | 8         | 22-02-2020 | 12         |
+| 16 | 3         | 22-02-2020 | 8          |
+| 17 | 6         | 22-02-2020 | 9          |
+| 18 | 4         | 22-02-2020 | 3          |
+| 19 | 3         | 22-02-2020 | 13         |
+| 20 | 5         | 22-02-2020 | 10         |
+| 21 | 9         | 22-02-2020 | 7          |
+| 22 | 8         | 22-02-2020 | 13         |
+| 23 | 8         | 23-02-2020 | 11         |
+| 24 | 7         | 23-02-2020 | 6          |
+| 25 | 1         | 23-02-2020 | 12         |
+
+Question1:
+----------
+Write a query to display the visit who is joining in february using like operator.
+Sql:
+   SELECT * FROM visit where visit_date like '___02_____%'
+
+| id | doctor_id | visit_date | patient_id |
+|----|-----------|------------|------------|
+| 1  | 5         | 20-02-2020 | 1          |
+| 2  | 4         | 20-02-2020 | 5          |
+| 3  | 3         | 20-02-2020 | 2          |
+| 4  | 6         | 20-02-2020 | 2          |
+| 5  | 1         | 20-02-2020 | 6          |
+| 6  | 3         | 20-02-2020 | 1          |
+| 7  | 2         | 21-02-2020 | 4          |
+| 8  | 5         | 21-02-2020 | 3          |
+| 9  | 3         | 21-02-2020 | 7          |
+| 10 | 7         | 21-02-2020 | 9          |
+| 11 | 1         | 21-02-2020 | 1          |
+| 12 | 9         | 21-02-2020 | 10         |
+| 13 | 2         | 21-02-2020 | 8          |
+| 14 | 5         | 21-02-2020 | 5          |
+| 15 | 8         | 22-02-2020 | 12         |
+| 16 | 3         | 22-02-2020 | 8          |
+| 17 | 6         | 22-02-2020 | 9          |
+| 18 | 4         | 22-02-2020 | 3          |
+| 19 | 3         | 22-02-2020 | 13         |
+| 20 | 5         | 22-02-2020 | 10         |
+| 21 | 9         | 22-02-2020 | 7          |
+| 22 | 8         | 22-02-2020 | 13         |
+| 23 | 8         | 23-02-2020 | 11         |
+| 24 | 7         | 23-02-2020 | 6          |
+| 25 | 1         | 23-02-2020 | 12         |
+
+
+NOT LIKE
+-------
+-Write a query to display all employees whose names not starting with ‘A’ but can ends with anything.
+Sql:
+    SELECT * FROM employees where first_name not like 'A%';
+    
+| id | first_name | last_name | department_id | salary | years_worked |
+|----|------------|-----------|---------------|--------|--------------|
+| 1  | Diane      | Turner    | 1             | 5330   | 4            |
+| 2  | Clarence   | Robinson  | 1             | 3617   | 2            |
+| 3  | Eugene     | Phillips  | 1             | 4877   | 2            |
+| 4  | Philip     | Mitchell  | 1             | 5259   | 3            |
+| 6  | Charles    | Wilson    | 2             | 5167   | 5            |
+| 7  | Russell    | Johnson   | 2             | 3762   | 4            |
+| 8  | Jacqueline | Cook      | 2             | 6923   | 3            |
+| 9  | Larry      | Lee       | 3             | 2796   | 4            |
+| 10 | Willie     | Patterson | 3             | 4771   | 5            |
+| 11 | Janet      | Ramirez   | 3             | 3782   | 2            |
+| 12 | Doris      | Bryant    | 3             | 6419   | 1            |
+| 14 | Keith      | Scott     | 3             | 4928   | 8            |
+| 15 | Karen      | Morris    | 4             | 6347   | 6            |
+| 16 | Kathy      | Sanders   | 4             | 6286   | 1            |
+| 17 | Joe        | Thompson  | 5             | 5639   | 3            |
+| 18 | Barbara    | Clark     | 5             | 3232   | 1            |
+| 19 | Todd       | Bell      | 5             | 4653   | 1            |
+| 20 | Ronald     | Butler    | 5             | 2076   | 5            |
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
