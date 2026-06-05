@@ -1,0 +1,56 @@
+WITH ROLLUP
+-----------
+- WITH ROLLUP generates subtotal rows for each group and grand total row at the end.
+
+Example#1:
+----------
+Q)Imagine you are a manager and want to see the total salary expenditure for each 
+  department, plus a grand total for the entire company. How would this query help 
+  you achieve that?
+
+    SELECT department, SUM(salary) as total_salary
+    FROM employee2
+    WHERE department IS NOT NULL
+    GROUP BY department
+    WITH ROLLUP
+
+    department |  total_salary
+    --------------------------
+    Finance    |  225000
+    HR         |  177000
+    IT         |  345000
+    NULL       |  747000
+
+Example#2
+----------
+Q)Imagine you are a manager and want to see the total salary expenditure for each 
+  department and each designation, plus a grand total for the entire company. 
+  How would this query help you achieve that?
+
+    SELECT department, designation, SUM(salary) as total_salary
+    FROM employee2
+    WHERE department IS NOT NULL
+    GROUP BY department, designation
+    WITH ROLLUP
+
+department | designation  | total_salary
+----------------------------------------
+Finance    | Analyst      | 135000
+Finance    | Manager      | 90000
+Finance    | NULL         | 225000     <- Total finance department
+HR         | Associate    | 102000
+HR         | Manager      | 75000
+HR         | NULL         | 177000     <- Total HR department
+IT         | DataEnginner | 165000
+IT         | Manager      | 120000
+IT         | Tester       | 60000
+IT         | NULL         | 345000     <- Total IT department
+NULL       | NULL         | 747000     <- All department total sum
+
+How it works:
+--------------
+- Groups data by department and designation.
+- Calculates SUM (salary) for each group.
+- Generates summary rows for each department (NULL designation).
+- Includes a grand total row (NULL department and designation).
+
