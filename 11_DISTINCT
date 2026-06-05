@@ -45,6 +45,9 @@ Sql:
     |----------|
     | 4        |
 
+Sql:
+   SELECT DISTINCT * FROM employees; -->Remove diplicate all coulmns
+
 
 
 
