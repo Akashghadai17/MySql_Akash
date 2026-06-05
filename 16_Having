@@ -1,0 +1,55 @@
+HAVING
+-------
+- We are not allowed to use where clause after group by clause. In this case we can use having clause.
+
+Difference Between Where and Having
+
+WHERE                                       | HAVING
+-----------------------------------------------------------------------------------------
+Filters rows before grouping                | Filters rows after grouping
+Cannot use aggregate functions directly     | Can use aggregate functions directly to filter groups
+Cannot use derived/aliased columns in WHERE | Can use derived/aliased columns in HAVING
+Can be used with SELECT, UPDATE, and DELETE | Works only with SELECT statements.
+statements.
+
+Example#1
+----------
+Q)Write a query to display those departments having more than 2 employees from employee table by using group by clause.
+- Select department,count(*) as Total_Emp from employee2 group by department having Total_emp > 2;
+                                            OR
+- SELECT department, count(*) EmpCount FROM employee2 GROUP BY department HAVING EmpCount>2;
+
+      department |  Total_Emp
+      -----------------------
+      HR         |  3
+      IT         |  4
+      Finance    |  3
+
+Example2
+-------
+Q)Write a query to display those department sums of salary having more than 10000 from employee table using group by clause.
+- select department,sum(salary) as total_sal from employee2 group by department having total_sal > 10000;
+
+      department |  total_sal
+      ------------------------
+      HR         |  177000
+      IT         |  345000
+      Finance    |  225000
+
+Example#3
+---------
+Q)Write a query to display sum of salary of ‘HR’ department.
+- select department,sum(salary) as total_sal from employee2 group by department having department='HR';
+
+      department |  total_sal
+      ------------------------
+      HR         |  177000
+
+Note
+----
+- We can use HAVING without an explicit GROUP BY clause. In this case, the entire table or the result set 
+  is treated as a single implicit group.
+
+  SELECT name, salary, salary*12 ann_salary FROM employee 
+  HAVING ann_salary > 900000;
+
