@@ -1,0 +1,72 @@
+Group By
+--------
+- It is used to create group based on given column/columns.
+Syntax
+--------
+  SELECT columnname from tablename group by columnname;
+  SELECT columnname from tablename group by col1, col2;
+- It helps to apply aggregate functions like COUNT(), SUM(), AVG(), MAX(), or MIN() on grouped data.
+
+Example#1
+---------
+Q)Write an SQL query to find the total salary expenditure for each department in the 'employee' table.
+- select department,sum(salary) as total from employee2 group by department;
+      department |  total
+      ---------------------
+      HR         |  177000
+      IT         |  345000
+      Finance    |  225000
+
+Example#2
+----------
+Q)Write an SQL query to find the number of employees in each department of the 'employee' table
+- select department,count(*) as Total_Emp from employee2 group by department;
+      department |  Total_Emp
+      -----------------------
+      HR         |  3
+      IT         |  4
+      Finance    |  3
+
+Example#3
+----------
+Q)Write an SQL query to find the maximum salary paid for each designation within each department in the 'employee' table’.
+- select department,designation,max(salary) as Total_salary from employee2 group by department,designation;
+      department | designation  | Total_salary
+      ----------------------------------------
+      HR         | Manager      | 75000
+      HR         | Associate    | 52000
+      IT         | DataEnginner | 85000
+      IT         | Tester       | 60000
+      Finance    | Analyst      | 70000
+      Finance    | Manager      | 90000
+      IT         | Manager      | 120000
+
+Example#4 
+----------
+Q)Write a query to display each department’s minimum, maximum and average salary from employee table.
+- SELECT department, max(salary), min(salary), avg(salary) FROM employee2 GROUP BY department;
+      department | max(salary) | min(salary) | avg(salary)
+      -----------------------------------------------------
+      HR         | 75000       | 50000       | 59000.0000
+      IT         | 120000      | 60000       | 86250.0000
+      Finance    | 90000       | 65000       | 75000.0000
+
+Note
+----
+- All non group function column specified after select then those all column must be specified after group by 
+  clause otherwise we will get error saying not a group by expression.
+
+    SELECT name,department,salary FROM employee GROUP BY department;
+    SELECT name,department FROM employee GROUP BY department, name;
+- When we are trying to display group function along with another column then we will get error.
+
+    SELECT department, sum(salary) FROM employee; 
+    SELECT department, sum(salary) FROM employee GROUP BY department;
+- We can use WHERE clause before Group BY
+
+    SELECT designation, sum(salary) FROM employee 
+    WHERE department=’IT’
+    GROUP BY designation;
+
+
+
