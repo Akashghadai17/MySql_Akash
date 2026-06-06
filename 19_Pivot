@@ -1,0 +1,57 @@
+Pivot
+-----
+- Convert rows to columns.
+
+SELECT 
+    region,
+    SUM(CASE WHEN product = 'Laptop' THEN amount END) AS Laptop_Sales,
+    SUM(CASE WHEN product = 'Phone' THEN amount END) AS Phone_Sales
+FROM sales
+GROUP BY region;
+
+    
+    region | Laptop_Sales | Phone_Sales
+    ------------------------------------
+    East   | 1000         | 500
+    West   | 800          | NULL
+    North  | NULL         | 700
+
+Question#1
+------------
+  You have been given a table named Account that stores transaction details. 
+  Each transaction can either be a Debit or Credit. Your task is to calculate 
+  the Net Balance for each account after applying all the debits and credits.
+
+    CREATE TABLE Account (
+        AccountID VARCHAR(10),    
+        TranType VARCHAR(10),     
+        Amount DECIMAL(10,2)      
+    );
+    
+    INSERT INTO Account (AccountID, TranType, Amount) VALUES
+    ('A1', 'Credit', 100.00),
+    ('A1', 'Debit', 40.00),
+    ('A1', 'Credit', 60.00),
+    ('A2', 'Debit', 200.00),
+    ('A2', 'Credit', 150.00),
+    ('A3', 'Credit', 500.00),
+    ('A3', 'Debit', 300.00),
+    ('A3', 'Debit', 100.00);
+    
+    SELECT AccountID,
+        SUM(CASE
+            WHEN TranType = 'Credit' THEN Amount
+            WHEN TranType = 'Debit' THEN -Amount
+            ELSE 0
+        END) AS NetBalance
+    FROM Account
+    GROUP BY AccountID;
+    
+    AccountID | NetBalance
+    ----------------------
+    A1        | 360.00
+    A2        | -150.00
+    A3        | 300.00
+
+
+
