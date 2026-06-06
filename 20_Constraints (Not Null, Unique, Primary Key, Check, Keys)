@@ -1,0 +1,238 @@
+CREATE TABLE employee (
+	employee_id int,
+   	name varchar(30),
+    	mobileno bigint,
+    	age int,
+    	department varchar(30),
+   	salary decimal(8,2)
+);
+Insert Records
+INSERT INTO employee VALUES(1, 'Ram', 1111111111, 20, 'IT', 30000);
+INSERT INTO employee VALUES(2, 'Anil', 2222222222, 0, 'IT', 30000);
+INSERT INTO employee VALUES(null, 'Raj', null, 10, 'IT', 30000);
+INSERT INTO employee VALUES(2, 'Raju', 2222222222, 10, 'XYZ', 30000);
+INSERT INTO employee VALUES(3, 'Ajay', 333333333,  10, 'HR', -30000);
+
+
+
+Constraints 
+-------------
+- Data integrity- Store only valid data in table.
+- Data integrity is a process that ensures only valid data should be stored in the database table. 
+- Constraints are used to prevent invalid data entry into our table. 
+- If table having null values then we can't add contrants.
+
+- 2 Level  constants-
+  1)Column level 
+  ---------------
+  - Allow for all keys
+  
+  2)Table level( Composite unique key):
+  - Allows all key but not allow not null.
+  - Uniqueness by combining more than one column.(rg- name+mob=unique)
+  - Table level constant = create composite unique key/ composite primary key.
+  - Single primary key with multiple columns called composite key.
+    CREATE TABLE employee( 
+    eno int, 
+    name varchar(20), 
+    primary key(eno, name) 
+    ); 
+
+
+  
+- We have following types of constraints: 
+
+1)  Not null 
+  ---------
+  - Null value = not allowed.
+  - Duplicate value = allowd
+    Example
+    -------
+    Name= Not null but allow duplicate value.
+    Example
+    ------
+    Column Level 
+  ---------------------
+  CREATE TABLE employee( 
+  eno int not null, 
+  name varchar(20) 
+  ); 
+
+   Insert Record 
+  --------------
+  INSERT INTO employee values(1,'Ram'); 
+  INSERT INTO employee values(null,'Ram'); 
+  Error:  Column 'eno' cannot be null 
+  
+
+  Table Level Syntax 
+  ------------------
+  CREATE TABLE employee( 
+  eno int not null, 
+  name varchar(20), 
+  not null(eno,name) 
+  ); 
+  - Error:  not null not support table level
+
+
+  2) Unique 
+  -------
+  - Null value =  allowed.
+  - Duplicate value = not allowd
+    Example
+    -------
+    email, mob
+
+    Column level
+    -------------
+    CREATE TABLE employee( 
+    eno int unique, 
+    name varchar(20) 
+    ); 
+
+    SELECT * FROM employee; 
+    INSERT INTO employee values(1,'Ram'); 
+    INSERT INTO employee values(null,'Ram'); 
+    INSERT INTO employee(name) values('Ram'); 
+    INSERT INTO employee values(1,'Swam'); 
+
+-If you want to add more then two column in unique used table level.
+-Eg(eco+name)
+- Technically this is called Composite unique key.
+
+    Composite unique key
+    -------------------
+    Table level
+    ------------
+    CREATE TABLE employee( 
+    eno int, 
+    name varchar(20), 
+    unique(eno, name) 
+
+  
+ 3) Primary key 
+  -----------
+  - Null value = Not allowed.
+  - Duplicate value = not allowd
+  - One table maximum one primary key.
+  
+
+    Example
+    -------
+    aadhar card
+
+    CREATE TABLE employee( 
+    eno int primary key, 
+    name varchar(20) 
+    ); 
+    DESC employee; 
+    SELECT * FROM employee; 
+    INSERT INTO employee values(1,'Ram'); 
+    INSERT INTO employee values(null,'Ram'); 
+    INSERT INTO employee(name) values('Ram'); 
+    INSERT INTO employee values(1,'Swam'); 
+
+
+  Apply constraint on Existing Table
+  ----------------------------------
+  - If table is empty / it name column not having null value;
+  - Alter table emp CHANGE name name varchar(20) not null;
+                          OR
+  - Alter table emp ADD CONSTRAINT UNIQUE(mobno);
+  
+    For primary key
+    ---------------
+    Alter table emp ADD Primary Key(mobno);
+     
+
+  DELETE CONTRAINT
+  ----------------
+  For(any CONSTRAINT)
+  - Alter table emp DROP CONSTRAINT mobno;
+  For primary key
+  - Alter table emp DROP Primary key;
+  
+  Check contraint
+  ---------------
+  age=18 to 60
+  mobileno=10digit
+  course=DE,DS
+- This constraint is used to define logical conditions according to our business rule. 
+  Example#1 
+  ---------
+  create table student( 
+  age int check (age between 10 and 20) 
+  ); 
+  INSERT INTO student VALUES(5); 
+  INSERT INTO student VALUES(15); 
+  INSERT INTO student VALUES(25); ->error
+
+  Example#2 [Table Level Constraint]
+  ----------------------------------
+  create table student( 
+  mobno bigint,
+  constraint check_mobileno check(length(mobno) = 10) 
+  ); 
+  INSERT INTO student VALUES(123456789); 
+  INSERT INTO student VALUES(12345678910); 
+  INSERT INTO student VALUES(1234567891); 
+
+Example#3 
+---------
+  create table student( 
+  course varchar(30) check(course in('Data Engineering','DevOps')) 
+  ); 
+  INSERT INTO student VALUES('Data Science'); 
+  INSERT INTO student VALUES('devops'); 
+  INSERT INTO student VALUES('Data Engineering'); 
+
+  Add Constraint on Existing Column
+  ---------------------------------
+  Alter table emp1 add CONSTRAINT  CHECK (course in ('DE','DS'));
+
+ Drop Constraint 
+ ---------------
+  Alter table emp1 ADD CONSTRAINT emp1_course_chek CHECK(course IN('DE','DS')
+  Alter table emp1 DROP CONSTRAINT emp_1
+
+  Assigning Multiple Constraint to Same Column 
+  --------------------------------------------
+  CREATE TABLE employee( 
+  eno int not null unique, 
+  name varchar(20) 
+  ); 
+
+
+Keys
+----
+Candidate Key = identify records uniquely.
+-Out of candidate choose a primary key.
+-Eg- Emp_id , mob , email.
+pK(Emp_id) 
+- Others called alternative key.
+
+Surrogate Key 
+--------------
+- A surrogate key is an artificially generated, unique identifier for a row. It has no meaning related to the entity.
+- Specify the AUTO_INCREMENT attribute to automatically generate unique values for each new row.
+- It is automatically generated by the database system.
+- It is typically an integer data type.
+
+CREATE TABLE student (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name varchar(20),
+    address varchar(30)
+);
+
+INSERT INTO student(name, address) VALUES('Ram','Pune');
+INSERT INTO student(name, address) VALUES('RaJ','Pune');
+
+-It generate id automatically.
+
+IMP
+---
+How to create Pk without using PK.
+Ans- not null unique 
+
+
+
