@@ -2,6 +2,27 @@ Pivot
 -----
 - Convert rows to columns.
 
+CREATE TABLE sales (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    region VARCHAR(50),
+    product VARCHAR(50),
+    amount INT
+);
+
+INSERT INTO sales (region, product, amount) VALUES
+('East', 'Laptop', 1000),
+('East', 'Phone', 500),
+('West', 'Laptop', 800),
+('North', 'Phone', 700);
+
+SELECT 
+    region,
+    SUM(CASE WHEN product = 'Laptop' THEN amount END) AS Laptop_Sales,
+    SUM(CASE WHEN product = 'Phone' THEN amount END) AS Phone_Sales
+FROM sales
+GROUP BY region;
+
+
 SELECT 
     region,
     SUM(CASE WHEN product = 'Laptop' THEN amount END) AS Laptop_Sales,
