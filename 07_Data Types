@@ -193,7 +193,7 @@ Example:
 decimal data type 
 -----------------
 -Non integral data type has an integer part and fractional part.
--We can use NUMERIC, DECIMAL or NUMBER data type to store non integral numbers.
+-We can use DECIMAL or NUMERIC data types to store non-integer (decimal) numbers.
 
 | Data Type           | Size (Bytes) |
 |---------------------|--------------|
